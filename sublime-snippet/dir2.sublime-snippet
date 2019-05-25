@@ -1,0 +1,24 @@
+<snippet>
+	<content><![CDATA[
+{
+	"time": ${1:0},
+	"directions": [
+		{
+			"direction": ${2:3},
+			"route": "${4}",
+			"name_ja": ["${6}", "${7}", "${8}"],
+			"name_en": ["${12}", "${13}", "${14}"]
+		},
+		{
+			"direction": ${3:1},
+			"route": "${5}",
+			"name_ja": ["${9}", "${10}", "${11}"],
+			"name_en": ["${15}", "${16}", "${17}"]
+		}
+	]
+},
+
+]]></content>
+	<tabTrigger>dir2</tabTrigger>
+	<scope>source.json</scope>
+</snippet>

@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[
+{
+	"time": ${1:0},
+	"route": "${2}",
+	"name": "${3}"
+},
+
+]]></content>
+	<tabTrigger>route</tabTrigger>
+	<scope>source.json</scope>
+</snippet>

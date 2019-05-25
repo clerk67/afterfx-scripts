@@ -1,0 +1,14 @@
+<snippet>
+	<content><![CDATA[
+{
+	"time": ${1:0},
+	"route": "${2}",
+	"distance": [${3:null}, ${4:null}, ${5:null}, ${6:null}],
+	"name_ja": ["${7}", "${8}", "${9}", "${10}"],
+	"name_en": ["${11}", "${12}", "${13}", "${14}"]
+},
+
+]]></content>
+	<tabTrigger>dst</tabTrigger>
+	<scope>source.json</scope>
+</snippet>
