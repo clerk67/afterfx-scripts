@@ -3,7 +3,7 @@
 
 var DEFAULT_DURATION = 5.0;
 var MINIMUM_INTERVAL = 2.0 / 3;
-var PROJECT_PATH = 'C:/Users//maruk//Creative Cloud Files//aep//';
+var PROJECT_PATH = '/Users/k.maruyama/Creative Cloud Files/aep/';
 
 var comp = app.project.activeItem;
 var fps = comp.frameRate;
@@ -29,8 +29,8 @@ var bridgeNameLength = null;
 var lastDirectionTime = 0;
 
 var project = app.project['file'].toString();
-var matches = project.match(/\/(\d{3})_(\d{2})\.aep$/);
-var file = new File(PROJECT_PATH + matches[1] + '//json//' + matches[2] + '.json');
+var matches = project.match(/\/(\d{3})_(\d{2})\.aepx?$/);
+var file = new File(PROJECT_PATH + matches[1] + '/json/' + matches[2] + '.json');
 
 if (file.open('r')) {
   var data = JSON.parse(file.read());
@@ -84,10 +84,12 @@ function addDirection(data) {
     var name_ja = '';
     var name_en = '';
     for (var k = 0; k < data['directions'][j]['name_ja'].length; k++) {
-      name_ja += data['directions'][j]['name_ja'][k] + '\n';
-      name_en += data['directions'][j]['name_en'][k] + '\n';
-      if (data['directions'][j]['name_ja'][k].length > 5) {
-        $.writeln('[WARN] topTextJp' + (j + 1) + '@' + data['time'] + ' "' + data['directions'][j]['name_ja'][k] + '"');
+      if (data['directions'][j]['name_ja'][k]) {
+        name_ja += data['directions'][j]['name_ja'][k] + '\n';
+        name_en += data['directions'][j]['name_en'][k] + '\n';
+        if (data['directions'][j]['name_ja'][k].length > 5) {
+          $.writeln('[WARN] topTextJp' + (j + 1) + '@' + data['time'] + ' "' + data['directions'][j]['name_ja'][k] + '"');
+        }
       }
     }
     if (j == 0) {
@@ -121,11 +123,13 @@ function addDistance(data) {
   var name_ja = '';
   var name_en = '';
   for (var j = 0; j < data['distance'].length; j++) {
-    distance += data['distance'][j] + '\n';
-    name_ja += data['name_ja'][j] + '\n';
-    name_en += data['name_en'][j] + '\n';
-    if (data['name_ja'][j].length > 5) {
-      $.writeln('[WARN] topTextJp1@' + Math.round(data['time'] + DEFAULT_DURATION * fps) + ' "' + data['name_ja'][j] + '"');
+    if (data['distance'][j]) {
+      distance += data['distance'][j] + '\n';
+      name_ja += data['name_ja'][j] + '\n';
+      name_en += data['name_en'][j] + '\n';
+      if (data['name_ja'][j].length > 5) {
+        $.writeln('[WARN] topTextJp1@' + Math.round(data['time'] + DEFAULT_DURATION * fps) + ' "' + data['name_ja'][j] + '"');
+      }
     }
   }
   dstLayer.text.sourceText.setValueAtTime(data['time'] / fps, distance);

@@ -22,11 +22,11 @@ var MAX_FRAME = 54000;
     var lon = [];
     var alt = [];
     var dir = [];
-    var fps = prompt('fps?', 30);
-    var playSpeed = prompt('playSpeed?', 5);
+    var fps = 30;
+    var playSpeed = 5;
     var videoCapturedAt, videoCaptured;
     while (true) {
-      videoCapturedAt = prompt('videoCapturedAt?', '000000');
+      videoCapturedAt = '000000';
       if (videoCapturedAt.length != 6) continue;
       var vc_h = parseInt(videoCapturedAt.substr(0, 2));
       var vc_m = parseInt(videoCapturedAt.substr(2, 2));
@@ -35,8 +35,8 @@ var MAX_FRAME = 54000;
       videoCaptured = parseInt(vc_s) + 60 * vc_m + 3600 * vc_h;
       if (!isNaN(videoCaptured)) break;
     }
-    var videoInPoint = prompt('videoInPoint?', 0);
-    var offset = prompt('offset?', 0);
+    var videoInPoint = 0;
+    var offset = 0;
     var startFrame = -1, csvFirstEntry = -1;
 
     // skip header lines
@@ -52,6 +52,7 @@ var MAX_FRAME = 54000;
       var chr = text.split(',');
       var date = chr[8].split('T');
       var time = date[1].split(':');
+      if (chr[5].length == 0) continue;
 
       lat[i] = parseFloat(chr[2]);
       lon[i] = parseFloat(chr[3]);
